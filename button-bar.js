@@ -1,5 +1,5 @@
 (function () {
-  var PIT_TOKEN = "pit-ffd9f87a-62d9-41e5-a603-b34563febadf";
+  var PROXY_URL = "https://ghl-tag-proxy.merlinfinancialca.workers.dev/";
   var LOCATION_CONFIG = {
     "J0LT6jSWLoLGpTazQJAO": {
       surveyUrl: "https://links.legacyfirstinsurance.org/widget/form/63QNmR94zgObUyifFrla"
@@ -34,11 +34,9 @@
     setTimeout(function () { t.remove(); }, 3000);
   }
 
-  function addTag(contactId, tag) {
+  function addTag(contactId, tag, locationId) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://services.leadconnectorhq.com/contacts/" + contactId + "/tags", true);
-    xhr.setRequestHeader("Authorization", "Bearer " + PIT_TOKEN);
-    xhr.setRequestHeader("Version", "2021-07-28");
+    xhr.open("POST", PROXY_URL, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
@@ -48,7 +46,7 @@
       }
     };
     xhr.onerror = function () { showToast("Network error adding tag", true); };
-    xhr.send(JSON.stringify({ tags: [tag] }));
+    xhr.send(JSON.stringify({ contactId: contactId, tag: tag, locationId: locationId }));
   }
 
   function loadJsPanel(cb) {
@@ -81,7 +79,7 @@
     });
   }
 
-  function buildBar(contactId, surveyUrl) {
+  function buildBar(contactId, surveyUrl, locationId) {
     if (document.getElementById("lfi-button-bar")) return;
 
     var bar = document.createElement("div");
@@ -97,7 +95,7 @@
         if (btnDef.isForm) {
           openForm(contactId, surveyUrl);
         } else {
-          addTag(contactId, btnDef.tag);
+          addTag(contactId, btnDef.tag, locationId);
         }
       });
       bar.appendChild(el);
@@ -117,7 +115,7 @@
       return;
     }
     if (existing) existing.remove();
-    buildBar(contactId, config.surveyUrl);
+    buildBar(contactId, config.surveyUrl, locationId);
   }
 
   var obs = new MutationObserver(function () {
