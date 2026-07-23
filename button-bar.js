@@ -86,13 +86,13 @@
 
     var bar = document.createElement("div");
     bar.id = "lfi-button-bar";
-    bar.style.cssText = "position:fixed;top:70px;right:16px;z-index:999999;display:flex;flex-wrap:wrap;gap:6px;max-width:600px;justify-content:flex-end;";
+    bar.style.cssText = "position:fixed;top:70px;left:16px;right:16px;z-index:999999;display:flex;flex-wrap:nowrap;gap:6px;justify-content:flex-end;overflow-x:auto;";
 
     BUTTONS.forEach(function (btnDef) {
       var el = document.createElement("button");
       el.textContent = btnDef.label;
       el.title = btnDef.tooltip;
-      el.style.cssText = "background:#0D1B3E;color:#C9A84C;border:2px solid #C9A84C;padding:8px 12px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;";
+      el.style.cssText = "background:#0D1B3E;color:#C9A84C;border:2px solid #C9A84C;padding:6px 10px;border-radius:4px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;";
       el.addEventListener("click", function () {
         if (btnDef.isForm) {
           openForm(contactId, surveyUrl);
