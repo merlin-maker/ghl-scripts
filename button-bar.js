@@ -29,7 +29,7 @@
   function showToast(msg, isError) {
     var t = document.createElement("div");
     t.textContent = msg;
-    t.style.cssText = "position:fixed;bottom:20px;right:20px;z-index:999999;background:" + (isError ? "#C0392B" : "#0D1B3E") + ";color:#C9A84C;padding:12px 20px;border-radius:6px;font-family:sans-serif;font-size:14px;box-shadow:0 2px 10px rgba(0,0,0,0.3);";
+    t.style.cssText = "position:fixed;bottom:20px;right:20px;z-index:999999;background:" + (isError ? "#C0392B" : "#0b1e3d") + ";color:#c9a227;padding:12px 20px;border-radius:6px;font-family:sans-serif;font-size:14px;box-shadow:0 2px 10px rgba(0,0,0,0.3);";
     document.body.appendChild(t);
     setTimeout(function () { t.remove(); }, 3000);
   }
@@ -68,7 +68,7 @@
       var src = surveyUrl + "?contact_id=" + contactId;
       var html = '<iframe src="' + src + '" style="width:100%;height:100%;border:0;"></iframe>';
       window.jsPanel.create({
-        theme: "#0D1B3E filled",
+        theme: "#0b1e3d filled",
         headerTitle: "Appointment Outcome",
         panelSize: "650 700",
         position: "center-top 0 80",
@@ -92,7 +92,7 @@
       var el = document.createElement("button");
       el.textContent = btnDef.label;
       el.title = btnDef.tooltip;
-      el.style.cssText = "background:#0D1B3E;color:#C9A84C;border:2px solid #C9A84C;padding:6px 10px;border-radius:4px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;";
+      el.style.cssText = "background:#0b1e3d;color:#c9a227;border:2px solid #c9a227;padding:6px 10px;border-radius:4px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;";
       el.addEventListener("click", function () {
         if (btnDef.isForm) {
           openForm(contactId, surveyUrl);
